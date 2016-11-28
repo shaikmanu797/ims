@@ -171,3 +171,5 @@ $RECYCLE.BIN/
 *.lnk
 
 /model/programs/db-settings.php
+/view/test.php
+/assets/test.php

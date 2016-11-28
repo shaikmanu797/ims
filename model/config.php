@@ -11,6 +11,6 @@
 
 
 require_once("programs/db-settings.php"); //Require DB connection
-require_once("functions/functions.php"); // Declare - Define all functions.
+//require_once("functions/functions.php"); // Declare - Define all functions.
 date_default_timezone_set("America/New_York");
 ?>

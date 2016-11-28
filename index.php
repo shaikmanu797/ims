@@ -5,9 +5,6 @@
  * Date: 11/27/2016
  * Time: 8:06 PM
  */
-echo "gaurav";
-echo "Tarun";
-echo "mansoor";
-
+require_once("view/login.php");
 
 ?>
