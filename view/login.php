@@ -1,3 +1,17 @@
+<?php
+
+session_start();
+if(isset($_SESSION) && !Empty($_SESSION['logger'])){
+    if($_SESSION['logger']['name']=="Admin"){
+        header("Location: view/home");
+    }
+}
+else{
+    session_unset();
+    session_destroy();
+}
+?>
+
 <!DOCTYPE html>
 <html >
 <head>
