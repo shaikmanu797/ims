@@ -22,9 +22,9 @@ li {
 th a {
     display: block;
     color: white;
-    padding: 13px;
+    padding: 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .main {
@@ -39,7 +39,7 @@ th a {
     background-color: #4CAF50 !important;
     color: white;
     font-family: "Arial";
-    font-size: 25px;
+    font-size: 18px;
     padding: 12px;
 }
 
@@ -50,7 +50,7 @@ th a {
 
 .icon-bar {
     margin: 0px;
-    margin-top: 140px;
+    margin-top: 100px;
     width: 60px;
     text-align: center;
     background-color: #555;
