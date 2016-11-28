@@ -6,10 +6,10 @@
  * Time: 10:57 AM
  */
 
-if(isset($_POST)){
+if(isset($_POST) && !Empty($_POST)){
     $u = $_POST['u'];
     $p = $_POST['p'];
-    if($u == "admin" && $p == "imsstore"){
+    if($u == "adminims" && $p == "imsstore"){
         session_start();
         $adminLoggedIn = array();
         $adminLoggedIn['name'] = "Admin";
@@ -19,8 +19,8 @@ if(isset($_POST)){
     }
     else{
         echo "<script>
-                alert('Only admin can log in to this site');
-                window.location.href='../../index';
+                window.alert('Only admin can log in to this site');
+                window.location.href='../../';
               </script>";
     }
 }
