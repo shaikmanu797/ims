@@ -9,11 +9,14 @@
 session_start();
 if(isset($_SESSION) && !Empty($_SESSION['logger'])){
     include("header.php");
-    var_dump($_SESSION);
-    for($i=1; $i<=25; $i++){
-        echo "<p>Some text some text some text some text..</p>".$i;
-    }
-
+    echo '<div class="main-header">
+            <b>Home</b>
+          </div>
+          <div class="main-content">';
+            for($i=1; $i<=20; $i++){
+                echo 'Yahoo we did it!'.$i.'<br />';
+            }
+    echo '</div>';
     include("footer.php");
 
 }
