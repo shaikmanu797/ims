@@ -24,6 +24,6 @@ if(mysqli_connect_errno()) {
     echo "Connection Failed: " . mysqli_connect_errno();
     exit();
 } else {
-   // echo "Connection Successful this connection is great";
+   echo "Connection Successful this connection is great";
 }
 ?>
