@@ -12,7 +12,7 @@ if(isset($_POST) && !Empty($_POST)){
                              break;
         case "Add Product": echo "prod";
                             break;
-        case "Add Location": echo "loc";
+        case "Add Location": echo insertLocation($postedContent);
                              break;
     }
 }

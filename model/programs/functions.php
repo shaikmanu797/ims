@@ -21,3 +21,22 @@ function insertCategory($postedContent){
     }
     return $msg;
 }
+
+function insertLocation($postedContent){
+    if(!Empty($postedContent) && $postedContent['Submit'] == "Add Location"){
+        require('db-settings.php');
+        $locName = trim($postedContent['locName']);
+
+        if($stmt = $mysqli -> prepare('INSERT INTO ims.location(location_name) VALUES(?)')){
+            $stmt -> bind_param("s", $locName);
+            $stmt -> execute();
+            $stmt -> close();
+            $msg = $locName." Location has been added successfully!!";
+        }
+        else{
+            $msg = die('Please go back and re-submit the form');
+        }
+        $mysqli -> close();
+    }
+    return $msg;
+}
