@@ -6,24 +6,18 @@ $db_user = "xmlproject"; //Name of database user
 $db_pass = "ims12345"; //Password for database user
 $db_table_prefix = ""; // if the table prefix exists use this variable as a global
 
+global $mysqli;
 
-//following variable declaration is for next class :)
-GLOBAL $errors;
-GLOBAL $successes;
+$mysqli = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
-$errors = array();
-$successes = array();
-
-/* Create a new mysqli object with database connection parameters */
-
-$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
-GLOBAL $mysqli;
-
-if(mysqli_connect_errno()) {
-    //display the reason for mysql connection error.
-    echo "Connection Failed: " . mysqli_connect_errno();
-    exit();
-} else {
-   echo "Connection Successful this connection is great";
+if (!$mysqli) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
 }
+else {
+   //echo "Connection Successful!";
+}
+
 ?>
