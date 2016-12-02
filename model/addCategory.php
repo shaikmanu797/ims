@@ -3,7 +3,7 @@
 Mansoor Baba Shaik
 */
 echo '<br/>
-      <form name="addCategory" method="post" action="programs/insertItems.php" enctype="multipart/form-data">
+      <form name="addCategory" method="post" action="programs/insertItems.php" enctype="multipart/form-data" autocomplete="off">
         <table border="0">
             <tbody>
                 <tr>

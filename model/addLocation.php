@@ -3,22 +3,21 @@
 Mansoor Baba Shaik
 */
 
-/*echo "Loc Page";*/
+echo '<br/>
+      <form name="addLocation" method="post" action="programs/insertItems.php" enctype="multipart/form-data" autocomplete="off">
+        <table border="0">
+            <tbody>
+                <tr>
+                    <th>Location: </th>
+                    <td>
+                        <input type="text" name="locName" size="50" maxlength="50" required />
+                    </td>
+                    <td>&nbsp;
+                        <input type="submit" name="Submit" value="Add Location" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </form>';
+
 ?>
-<br/>
-<form name="addlocation" action="" method="post">
-  <!-- Table goes in the document BODY -->
-  <table class="table-style-three">
-      <thead>
-      <!-- Display CRUD options in TH format -->
-
-
-      <tr>
-        <th>Location Name:</th>
-        <td><input type="text" name="locationName" value="" maxlength="250" size="100" required></td>
-
-          <td>&nbsp;<input type="submit" name="Submit" value="Create"></td>
-      </tr>
-      </thead>
-  </table>
-</form>
