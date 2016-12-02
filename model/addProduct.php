@@ -1,7 +1,8 @@
 <?php
-//require_once("config.php");
 
-echo '<form name="addproduct" action="addproduct_DBINSERT.php" method="post">
+
+echo '<br/>
+    <form name="addproduct" action="addproduct_DBINSERT.php" method="post">
   <!-- Table goes in the document BODY -->
   <table>
       <thead>

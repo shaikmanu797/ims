@@ -13,6 +13,7 @@ if(isset($_SESSION) && !Empty($_SESSION['logger'])){
             <b>Create</b>
           </div>
           <div class="main-content">
+            <script type="text/javascript" src="../js/iframeActs.js"></script>
             <form name="addfrom" method="post" target="add-iframe" action="../model/addtype.php">
             <center>
             <select name="addtype" required>
@@ -25,7 +26,7 @@ if(isset($_SESSION) && !Empty($_SESSION['logger'])){
             </center>
             </form>
             <br/>
-            <iframe name="add-iframe" src="../model/addtype.php" height="100%" width="100%" frameborder="0"></iframe>
+            <iframe name="add-iframe" id="addIframe" onload="iframeLoaded(\'addIframe\');" src="../model/addtype.php" height="100%" width="100%" frameborder="0"></iframe>
           </div>';
     include("footer.php");
 
