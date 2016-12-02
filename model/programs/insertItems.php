@@ -10,7 +10,7 @@ if(isset($_POST) && !Empty($_POST)){
     switch ($form){
         case "Add Category": echo insertCategory($postedContent);
                              break;
-        case "Add Product": echo "prod";
+        case "Add Product": echo insertProduct($postedContent);
                             break;
         case "Add Location": echo insertLocation($postedContent);
                              break;

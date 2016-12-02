@@ -1,8 +1,11 @@
 <?php
 
+require_once('programs/functions.php');
+$locDetails = getLocation();
+$catDetails = getCategory();
 
 echo '<br/>
-        <form name="addProduct" action="programs/insertItems.php" method="post" enctype="multipart/form-data">
+        <form name="addProduct" action="programs/insertItems" method="post" enctype="multipart/form-data">
         <!-- Table goes in the document BODY -->
         <table>
             <thead>
@@ -12,7 +15,9 @@ echo '<br/>
                     <td> 
                         <select name="category" required>
                             <option value=""></option>';
-                
+                    for($i=0; $i<count($catDetails['id']); $i++){
+                      echo '<option value="'.$catDetails['id'][$i].'">'.$locDetails['locName'][$i].'</option>';
+                    }
 echo                   '</select>
                     </td>
                 </tr>
@@ -47,7 +52,9 @@ echo                   '</select>
                     <td> 
                         <select name="location" required>
                             <option value=""></option>';
-                
+                    for($i=0; $i<count($locDetails['id']); $i++){
+                        echo '<option value="'.$locDetails['id'][$i].'">'.$locDetails['locName'][$i].'</option>';
+                    }
 echo                   '</select></td>
                 </tr>
                 <tr>
