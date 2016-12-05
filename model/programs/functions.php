@@ -111,9 +111,29 @@ function getCategory(){
     return $catDetails;
 }
 
-function getProduct(){
+function getAllProducts(){
     require('db-settings.php');
     if($stmt = $mysqli -> prepare("SELECT category_id, prodname, price, quantity, description, location_id, manufacturer FROM product")){
+        $stmt -> execute();
+        $stmt -> bind_result($category_id, $prodName, $price, $quantity, $description, $location_id, $manufacturer);
+        $products = array();
+        while($stmt -> fetch()){
+            $products['category_id'][] = $category_id;
+            $products['prodName'][] = $prodName;
+            $products['price'][] = $price;
+            $products['quantity'][] = $quantity;
+            $products['description'][] = $description;
+            $products['location_id'][] = $location_id;
+            $products['manufacturer'][] = $manufacturer;
+        }
+    }
+    return $products;
+}
+
+function getProduct($id){
+    require('db-settings.php');
+    if($stmt = $mysqli -> prepare("SELECT category_id, prodname, price, quantity, description, location_id, manufacturer FROM product WHERE id=?")){
+        $stmt -> bind_param("i", $id);
         $stmt -> execute();
         $stmt -> bind_result($category_id, $prodName, $price, $quantity, $description, $location_id, $manufacturer);
         $prodDetails = array();
@@ -129,3 +149,45 @@ function getProduct(){
     }
     return $prodDetails;
 }
+
+/**
+ * Retreiving  functions -- end here
+ */
+
+/**
+ * Displaying  functions -- start here
+ */
+
+function tableDescr($id){
+    $products=getProduct($id);
+    $sxe = array();
+    $xmlContent = array();
+    for($i=0; $i<count($products['description']); $i++){
+        $sxe[$i]= new SimpleXMLElement($products['description'][$i]);
+        $xmlContent[$i]['title'][] = $sxe[$i] -> getName();
+        foreach($sxe[$i] -> children() as $child) {
+            $xmlContent[$i]['elementNames'][] = $child->getName();
+            $xmlContent[$i]['values'][] = $child;
+        }
+    }
+
+
+    for($i=0; $i<count($xmlContent); $i++) {
+        echo '<table name="' . $xmlContent[$i]['title'][0] . '" border="1" cellspacing="1" cellpadding="3" >
+            <tr>
+              <th>Description</th>
+              <th>Details</th>
+            </tr>';
+        for($j=0; $j<count($xmlContent[$i]['elementNames']); $j++){
+            echo '<tr>
+                <td>'.$xmlContent[$i]['elementNames'][$j].'</td>
+                <td>'.$xmlContent[$i]['values'][$j].'</td>
+              </tr>';
+        }
+        echo '</table>' . "<br/><br/>";
+    }
+}
+
+/**
+ * Displaying  functions -- end here
+ */
