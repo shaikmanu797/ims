@@ -1,6 +1,6 @@
 <?php
 //Development Database Information
-$db_host = "192.168.1.154"; //Host address (most likely localhost)
+$db_host = "localhost"; //Host address (most likely localhost)
 $db_name = "ims"; //Name of Database
 $db_user = "xmlproject"; //Name of database user
 $db_pass = "ims12345"; //Password for database user

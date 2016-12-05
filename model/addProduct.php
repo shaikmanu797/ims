@@ -16,7 +16,7 @@ echo '<br/>
                         <select name="category" required>
                             <option value=""></option>';
                     for($i=0; $i<count($catDetails['id']); $i++){
-                      echo '<option value="'.$catDetails['id'][$i].'">'.$locDetails['locName'][$i].'</option>';
+                      echo '<option value="'.$catDetails['id'][$i].'">'.$catDetails['catName'][$i].'</option>';
                     }
 echo                   '</select>
                     </td>
@@ -28,7 +28,7 @@ echo                   '</select>
                 </tr>
 
                 <tr>
-                    <th>Price</th>
+                    <th>Each Price</th>
                     <td><input type="number" min="0" step="0.01" max="999999999" name="price" value="" required></td>
                 </tr>
 
@@ -39,14 +39,15 @@ echo                   '</select>
       
                 <tr>
                     <th>Description</th>
-                    <td><input type="file" name="description" accept="application/xml" value="" required></td>
+                    <td>
+                        <iframe src="upload.php" height="70px" width="383px" scrolling="auto" frameborder="0"></iframe>
+                    </td>
                 </tr>
                 
-                <tr>
+                <tr id="preview">
+                    <th></th>
                     <td></td>
-                    <td><i><b>(Upload .xml files only)</b></i></td>
                 </tr>
-       
                 <tr>
                     <th>Location</th>
                     <td> 
