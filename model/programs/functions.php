@@ -83,70 +83,105 @@ function insertProduct($postedContent){
  * Retreiving  functions -- start here
  */
 
-function getLocation(){
+function getLocation($id){
     require('db-settings.php');
-    if($stmt = $mysqli -> prepare("SELECT id, location_name FROM location")){
-        $stmt -> execute();
-        $stmt -> bind_result($locid, $locname);
-        $locDetails = array();
-        while($stmt -> fetch()){
-            $locDetails['id'][] = $locid;
-            $locDetails['locName'][] = $locname;
+    if(isset($id) && !Empty($id)) {
+        if ($stmt = $mysqli -> prepare("SELECT location_name FROM location WHERE id=?")) {
+            $stmt -> bind_param("i", $id);
+            $stmt->execute();
+            $stmt->bind_result($locname);
+            $locDetails = array();
+            while ($stmt->fetch()) {
+                $locDetails['locName'] = $locname;
+            }
+            $stmt->close();
         }
     }
+    else{
+        if ($stmt = $mysqli -> prepare("SELECT id, location_name FROM location")) {
+            $stmt->execute();
+            $stmt->bind_result($locid, $locname);
+            $locDetails = array();
+            while ($stmt->fetch()) {
+                $locDetails['id'][] = $locid;
+                $locDetails['locName'][] = $locname;
+            }
+            $stmt->close();
+        }
+    }
+    $mysqli -> close();
     return $locDetails;
 }
 
-function getCategory(){
+function getCategory($id){
     require('db-settings.php');
-    if($stmt = $mysqli -> prepare("SELECT id, type FROM category")){
-        $stmt -> execute();
-        $stmt -> bind_result($catid, $catName);
-        $catDetails = array();
-        while($stmt -> fetch()){
-            $catDetails['id'][] = $catid;
-            $catDetails['catName'][] = $catName;
+    if(isset($id) && !Empty($id)){
+        if($stmt = $mysqli -> prepare("SELECT type FROM category WHERE id=?")) {
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $stmt->bind_result($catName);
+            $catDetails = array();
+            while ($stmt->fetch()) {
+                $catDetails['catName'] = $catName;
+            }
+            $stmt->close();
         }
     }
+    else{
+        if($stmt = $mysqli -> prepare("SELECT id, type FROM category")){
+            $stmt -> execute();
+            $stmt -> bind_result($catid, $catName);
+            $catDetails = array();
+            while($stmt -> fetch()){
+                $catDetails['id'][] = $catid;
+                $catDetails['catName'][] = $catName;
+            }
+            $stmt -> close();
+        }
+    }
+    $mysqli -> close();
     return $catDetails;
-}
-
-function getAllProducts(){
-    require('db-settings.php');
-    if($stmt = $mysqli -> prepare("SELECT category_id, prodname, price, quantity, description, location_id, manufacturer FROM product")){
-        $stmt -> execute();
-        $stmt -> bind_result($category_id, $prodName, $price, $quantity, $description, $location_id, $manufacturer);
-        $products = array();
-        while($stmt -> fetch()){
-            $products['category_id'][] = $category_id;
-            $products['prodName'][] = $prodName;
-            $products['price'][] = $price;
-            $products['quantity'][] = $quantity;
-            $products['description'][] = $description;
-            $products['location_id'][] = $location_id;
-            $products['manufacturer'][] = $manufacturer;
-        }
-    }
-    return $products;
 }
 
 function getProduct($id){
     require('db-settings.php');
-    if($stmt = $mysqli -> prepare("SELECT category_id, prodname, price, quantity, description, location_id, manufacturer FROM product WHERE id=?")){
-        $stmt -> bind_param("i", $id);
-        $stmt -> execute();
-        $stmt -> bind_result($category_id, $prodName, $price, $quantity, $description, $location_id, $manufacturer);
-        $prodDetails = array();
-        while($stmt -> fetch()){
-            $prodDetails['category_id'][] = $category_id;
-            $prodDetails['prodName'][] = $prodName;
-            $prodDetails['price'][] = $price;
-            $prodDetails['quantity'][] = $quantity;
-            $prodDetails['description'][] = $description;
-            $prodDetails['location_id'][] = $location_id;
-            $prodDetails['manufacturer'][] = $manufacturer;
+    if(isset($id) && !Empty($id)) {
+        if ($stmt = $mysqli->prepare("SELECT category_id, prodname, price, quantity, description, location_id, manufacturer FROM product WHERE id=?")) {
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $stmt->bind_result($category_id, $prodName, $price, $quantity, $description, $location_id, $manufacturer);
+            $prodDetails = array();
+            while ($stmt->fetch()) {
+                $prodDetails['category_id'] = $category_id;
+                $prodDetails['prodName'] = $prodName;
+                $prodDetails['price'] = $price;
+                $prodDetails['quantity'] = $quantity;
+                $prodDetails['description'] = $description;
+                $prodDetails['location_id'] = $location_id;
+                $prodDetails['manufacturer'] = $manufacturer;
+            }
+            $stmt->close();
         }
     }
+    else{
+        if($stmt = $mysqli -> prepare("SELECT id, category_id, prodname, price, quantity, description, location_id, manufacturer FROM product")){
+            $stmt -> execute();
+            $stmt -> bind_result($id, $category_id, $prodName, $price, $quantity, $description, $location_id, $manufacturer);
+            $prodDetails = array();
+            while($stmt -> fetch()){
+                $prodDetails['id'][] = $id;
+                $prodDetails['category_id'][] = $category_id;
+                $prodDetails['prodName'][] = $prodName;
+                $prodDetails['price'][] = $price;
+                $prodDetails['quantity'][] = $quantity;
+                $prodDetails['description'][] = $description;
+                $prodDetails['location_id'][] = $location_id;
+                $prodDetails['manufacturer'][] = $manufacturer;
+            }
+            $stmt->close();
+        }
+    }
+    $mysqli -> close();
     return $prodDetails;
 }
 
@@ -159,33 +194,28 @@ function getProduct($id){
  */
 
 function tableDescr($id){
-    $products=getProduct($id);
-    $sxe = array();
+    $product=getProduct($id);
+    //print_r($product);
     $xmlContent = array();
-    for($i=0; $i<count($products['description']); $i++){
-        $sxe[$i]= new SimpleXMLElement($products['description'][$i]);
-        $xmlContent[$i]['title'][] = $sxe[$i] -> getName();
-        foreach($sxe[$i] -> children() as $child) {
-            $xmlContent[$i]['elementNames'][] = $child->getName();
-            $xmlContent[$i]['values'][] = $child;
-        }
+    $sxe = new SimpleXMLElement($product['description']);
+    $xmlContent['title'][] = $sxe -> getName();
+    foreach($sxe -> children() as $child) {
+        $xmlContent['elementNames'][] = $child->getName();
+        $xmlContent['values'][] = $child;
     }
-
-
-    for($i=0; $i<count($xmlContent); $i++) {
-        echo '<table name="' . $xmlContent[$i]['title'][0] . '" border="1" cellspacing="1" cellpadding="3" >
+    //print_r($xmlContent);
+    echo '<table align="center" name="' . $xmlContent['title'][0] . '" border="1" width="100%" cellspacing="1" cellpadding="6" >
             <tr>
-              <th>Description</th>
-              <th>Details</th>
+              <th width="auto">Description</th>
+              <th width="auto">Details</th>
             </tr>';
-        for($j=0; $j<count($xmlContent[$i]['elementNames']); $j++){
-            echo '<tr>
-                <td>'.$xmlContent[$i]['elementNames'][$j].'</td>
-                <td>'.$xmlContent[$i]['values'][$j].'</td>
+    for($i=0; $i<count($xmlContent['elementNames']); $i++){
+        echo '<tr>
+                  <td width="auto">&nbsp;&nbsp;'.$xmlContent['elementNames'][$i].'</td>
+                  <td width="auto">&nbsp;&nbsp;'.$xmlContent['values'][$i].'</td>
               </tr>';
-        }
-        echo '</table>' . "<br/><br/>";
     }
+        echo '</table>' . "<br/><br/>";
 }
 
 /**
