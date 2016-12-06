@@ -221,3 +221,23 @@ function tableDescr($id){
 /**
  * Displaying  functions -- end here
  */
+
+
+/**
+ * Updating  functions -- start here
+ */
+
+function updateCategory($id, $old, $new){
+    require('db-settings.php');
+    if ($stmt = $mysqli -> prepare("UPDATE category SET type=? WHERE id=? AND type=?")) {
+        $stmt->bind_param("sis", $new, $id, $old);
+        $stmt->execute();
+        $stmt->close();
+        $msg = $old." has been updated to ".$new;
+    }
+    else{
+        $msg = die("Updation error occurred!!");
+    }
+    $mysqli -> close();
+    return $msg;
+}

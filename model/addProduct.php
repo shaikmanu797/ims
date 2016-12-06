@@ -5,7 +5,7 @@ $locDetails = getLocation();
 $catDetails = getCategory();
 
 echo '<br/>
-        <form name="addProduct" action="programs/insertItems" method="post" enctype="multipart/form-data">
+        <form name="addProduct" action="programs/insertItems" method="post" enctype="multipart/form-data" autocomplete="off">
         <!-- Table goes in the document BODY -->
         <table>
             <thead>

@@ -1,32 +1,32 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: mshaik_tmp
- * Date: 11/28/2016
- * Time: 11:05 AM
+ * User: Mansoor Baba Shaik
+ * Date: 12/6/2016
+ * Time: 2:01 PM
  */
 
 session_start();
 if(isset($_SESSION) && !Empty($_SESSION['logger'])){
     include("header.php");
     echo '<div class="main-header">
-            <b>Create</b>
+            <b>Edit</b>
           </div>
           <div class="main-content">
             <script type="text/javascript" src="../js/iframeActs.js"></script>
-            <form name="addfrom" method="post" target="add-iframe" action="../model/addtype.php">
+            <form name="editfrom" method="post" target="edit-iframe" action="../model/edittype.php">
             <center>
-            <select name="addtype" required>
+            <select name="edittype" required>
                 <option value=""></option>
                 <option value="1">Category</option>
                 <option value="2">Product</option>
                 <option value="3">Location</option>
             </select>&nbsp;
-            <input type="submit" name="Submit" value="Add">
+            <input type="submit" name="Submit" value="Edit">
             </center>
             </form>
             <br/>
-            <iframe name="add-iframe" id="addIframe" scrolling="no" onload="iframeLoaded(\'addIframe\');" src="../model/addtype.php" height="100%" width="100%" frameborder="0"></iframe>
+            <iframe name="edit-iframe" id="editIframe" onload="iframeLoaded(\'editIframe\');" src="../model/edittype.php" height="100%" width="100%" scrolling="no" frameborder="0"></iframe>
           </div>';
     include("footer.php");
 
@@ -38,6 +38,3 @@ else{
 }
 
 ?>
-
-
-
