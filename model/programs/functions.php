@@ -241,3 +241,18 @@ function updateCategory($id, $old, $new){
     $mysqli -> close();
     return $msg;
 }
+
+function updateLocation($id, $old, $new){
+    require('db-settings.php');
+    if ($stmt = $mysqli -> prepare("UPDATE location SET location_name=? WHERE id=? AND location_name=?")) {
+        $stmt->bind_param("sis", $new, $id, $old);
+        $stmt->execute();
+        $stmt->close();
+        $msg = $old." has been updated to ".$new;
+    }
+    else{
+        $msg = die("Updation error occurred!!");
+    }
+    $mysqli -> close();
+    return $msg;
+}
