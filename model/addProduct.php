@@ -1,8 +1,8 @@
 <?php
 
 require_once('programs/functions.php');
-$locDetails = getLocation();
-$catDetails = getCategory();
+$locDetails = getLocation('');
+$catDetails = getCategory('');
 
 echo '<br/>
         <form name="addProduct" action="programs/insertItems" method="post" enctype="multipart/form-data" autocomplete="off">

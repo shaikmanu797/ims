@@ -4,7 +4,7 @@ Mansoor Baba Shaik
 */
 
 require('programs/functions.php');
-$locations = getLocation();
+$locations = getLocation('');
 echo '<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
           <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
           <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>

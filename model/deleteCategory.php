@@ -7,7 +7,7 @@
  */
 
 require('programs/functions.php');
-$categories = getCategory();
+$categories = getCategory('');
     echo '<script type="text/javascript" language="javascript" src="../js/validateDelete.js"></script>
           <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
           <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
