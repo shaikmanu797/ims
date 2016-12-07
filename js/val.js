@@ -71,8 +71,9 @@ function validateDelete(id){
 function changeDescr(id) {
     var id = document.getElementById(id);
     var conf = confirm('Are you sure about changing the description?');
+    var descr = document.getElementById('descriptionId');
     if(conf){
-        id.innerHTML = '<iframe src="upload.php" height="70px" width="383px" scrolling="auto" frameborder="0"></iframe>';
+        id.innerHTML = '<input type="hidden" name="description" value="filevalue" /><iframe src="upload.php" height="70px" width="383px" scrolling="auto" frameborder="0"></iframe>';
         var preview = document.getElementById('preview');
         preview.innerHTML = '<th style="color: red;">Message</th><td style="color: red;">If you do not want to change the description click on Go Back link above!!</td>';
     }

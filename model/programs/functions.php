@@ -258,7 +258,46 @@ function updateLocation($id, $old, $new){
 }
 
 function updateProduct($postedContent){
-    return $postedContent;
+    if(!Empty($postedContent)) {
+        require('db-settings.php');
+        $id = $postedContent['id'];
+        $category_id = trim($postedContent['category']);
+        $prodName = trim($postedContent['prodName']);
+        $price = trim($postedContent['price']);
+        $quantity = trim($postedContent['quantity']);
+        $description = trim($postedContent['description']);
+        if(!Empty($description) && $description == "filevalue"){
+            session_start();
+            $target = "uploads/".$_SESSION['files']['newname'];
+            $xml = simplexml_load_file(trim($target));
+            $description = $xml -> asXML();
+            unlink($target);
+            unset($_SESSION['files']);
+        }
+        else{
+            if(!Empty($description) && $description == "dbvalue"){
+                $description = trim(getProduct($id)['description']);
+            }
+        }
+        $location_id = trim($postedContent['location']);
+        $manufacturer = trim($postedContent['manufacturer']);
+        require('db-settings.php');
+        if($stmt = $mysqli -> prepare('UPDATE product SET 
+                                                        category_id = ?, prodname = ?, price = ?, quantity = ?, 
+                                                        description = ?, location_id = ?, manufacturer = ? 
+                                       WHERE id = ?')){
+            $stmt -> bind_param("isdisisi", $category_id, $prodName, $price, $quantity,
+                                            $description, $location_id, $manufacturer, $id);
+            $stmt -> execute();
+            $stmt -> close();
+            $msg = $prodName." Product has been updated successfully!!";
+        }
+        else{
+            $msg = die('Please go back and re-submit the form');
+        }
+        $mysqli -> close();
+    }
+    return $msg;
 }
 
 /**

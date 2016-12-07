@@ -13,9 +13,12 @@ if(isset($_SESSION) && !Empty($_SESSION['logger'])){
             <b>Home</b>
           </div>
           <div class="main-content">';
-            for($i=1; $i<=20; $i++){
-                echo 'Yahoo we did it!'.$i.'<br />';
-            }
+    echo    "<b>Project Done By:</b><br/>
+             <ol>
+                <li>Mansoor Baba Shaik</li><br/>
+                <li>Tarun H. Jeswani</li><br/>
+                <li>Gaurav A. Samant</li><br/>
+             </ol>";
     echo '</div>';
     include("footer.php");
 

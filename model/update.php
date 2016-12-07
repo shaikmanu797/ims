@@ -73,6 +73,7 @@ if(isset($_GET) && !Empty($_GET['id']) && !Empty($_GET['for'])){
                 <tr>
                     <th>Description</th>
                     <td id="fileDescr">
+                        <input type="hidden" name="description" value="dbvalue" />
                         <a href="preview?id='.$id.'" target="_blank">Preview</a>&nbsp; &nbsp;
                         <a href="javascript: changeDescr(\'fileDescr\'); top.iframeLoaded(\'editIframe\');">Change</a>
                     </td>
@@ -143,7 +144,7 @@ elseif(isset($_POST) && !Empty($_POST) &&($_POST['Submit'] == "Update")){
         switch($tab){
             case 1: echo updateCategory($_POST['id'], $_POST['oldcatName'],$_POST['newcatName']);
                     break;
-            case 2: print_r(updateProduct($_POST));
+            case 2: echo updateProduct($_POST);
                     break;
             case 3: echo updateLocation($_POST['id'], $_POST['oldlocName'],$_POST['newlocName']);
                     break;
