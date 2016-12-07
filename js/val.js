@@ -40,7 +40,14 @@ function validateDelete(id){
         }
     }
     else if(id == 2){
-
+        var dec = confirm("Do you really want to delete this category?");
+        if (dec) {
+            document.productForm.action = "delete?tab=2";
+            document.productForm.submit();
+        }
+        else {
+            return false;
+        }
     }
     else{
         var dec = confirm("Do you really want to delete this location?");

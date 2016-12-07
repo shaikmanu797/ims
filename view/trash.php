@@ -22,7 +22,7 @@ if(isset($_SESSION) && !Empty($_SESSION['logger'])){
                 <option value="2">Product</option>
                 <option value="3">Location</option>
             </select>&nbsp;
-            <input type="submit" name="Submit" value="Delete">
+            <input type="submit" name="Submit" value="Select">
             </center>
             </form>
             <br/>

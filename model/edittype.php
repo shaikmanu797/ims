@@ -6,7 +6,7 @@
  * Time: 2:02 PM
  */
 
-if(isset($_POST) && !Empty($_POST) && $_POST['Submit'] == 'Edit'){
+if(isset($_POST) && !Empty($_POST) && $_POST['Submit'] == 'Select'){
     $editID = $_POST["edittype"];
     switch($editID){
         case 1: require_once('editCategory.php');

@@ -11,7 +11,7 @@ echo '<br/>
             <thead>
             <!-- Display CRUD options in TH format -->
                 <tr>
-                    <th>Categroy Id</th>
+                    <th>Category Id</th>
                     <td> 
                         <select name="category" required>
                             <option value=""></option>';

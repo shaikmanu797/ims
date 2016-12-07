@@ -6,7 +6,7 @@
  * Time: 3:38 PM
  */
 
-if(isset($_POST) && !Empty($_POST) && $_POST['Submit'] == 'Delete'){
+if(isset($_POST) && !Empty($_POST) && $_POST['Submit'] == 'Select'){
     $deleteID = $_POST["deletetype"];
     switch($deleteID){
         case 1: require_once('deleteCategory.php');

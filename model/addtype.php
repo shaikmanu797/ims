@@ -2,7 +2,7 @@
 /*Created by 
 Mansoor Baba Shaik
 */
-if(isset($_POST) && !Empty($_POST) && $_POST['Submit'] == 'Add'){
+if(isset($_POST) && !Empty($_POST) && $_POST['Submit'] == 'Select'){
     $addID = $_POST["addtype"];
     switch($addID){
         case 1: require_once('addCategory.php');

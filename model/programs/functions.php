@@ -295,3 +295,22 @@ function deleteLocation($id, $location){
     $mysqli -> close();
     return $msg;
 }
+
+function deleteProduct($id){
+    require('db-settings.php');
+    if ($stmt = $mysqli -> prepare("DELETE FROM product WHERE id=?")) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+        $msg = "This product has been delete successfully!!";
+    }
+    else{
+        $msg = die("Deletion error occurred!!");
+    }
+    $mysqli -> close();
+    return $msg;
+}
+
+/**
+ * Deleting  functions -- end here
+ */
