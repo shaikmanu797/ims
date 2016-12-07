@@ -256,3 +256,42 @@ function updateLocation($id, $old, $new){
     $mysqli -> close();
     return $msg;
 }
+
+/**
+ * Updating  functions -- end here
+ */
+
+
+/**
+ * Deleting  functions -- start here
+ */
+
+function deleteCategory($id, $category){
+    require('db-settings.php');
+    if ($stmt = $mysqli -> prepare("DELETE FROM category WHERE id=? AND type=?")) {
+        $stmt->bind_param("is", $id, $category);
+        $stmt->execute();
+        $stmt->close();
+        $msg = $category." has been delete successfully!!";
+    }
+    else{
+        $msg = die("Deletion error occurred!!");
+    }
+    $mysqli -> close();
+    return $msg;
+}
+
+function deleteLocation($id, $location){
+    require('db-settings.php');
+    if ($stmt = $mysqli -> prepare("DELETE FROM location WHERE id=? AND location_name=?")) {
+        $stmt->bind_param("is", $id, $location);
+        $stmt->execute();
+        $stmt->close();
+        $msg = $location." has been delete successfully!!";
+    }
+    else{
+        $msg = die("Deletion error occurred!!");
+    }
+    $mysqli -> close();
+    return $msg;
+}
