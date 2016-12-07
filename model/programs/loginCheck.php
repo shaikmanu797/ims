@@ -9,7 +9,7 @@
 if(isset($_POST) && !Empty($_POST)){
     $u = $_POST['u'];
     $p = $_POST['p'];
-    if($u == "adminims" && $p == "imsstore"){
+    if($u == "admin" && $p == "store123ims"){
         session_start();
         $adminLoggedIn = array();
         $adminLoggedIn['name'] = "Admin";

@@ -13,12 +13,7 @@ if(isset($_SESSION) && !Empty($_SESSION['logger'])){
             <b>Home</b>
           </div>
           <div class="main-content">';
-    echo    "<b>Project Done By:</b><br/>
-             <ol>
-                <li>Mansoor Baba Shaik</li><br/>
-                <li>Tarun H. Jeswani</li><br/>
-                <li>Gaurav A. Samant</li><br/>
-             </ol>";
+    echo    '<center><img src="../images/inventory.jpg" width="70%" height="40%" alt="Welcome to IMS" /></center>';
     echo '</div>';
     include("footer.php");
 
