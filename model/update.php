@@ -29,8 +29,97 @@ if(isset($_GET) && !Empty($_GET['id']) && !Empty($_GET['for'])){
               '</form>';
     }
     elseif($for == "2"){
+        $locDetails = getLocation('');
+        $catDetails = getCategory('');
+        $prodDetails = getProduct($id);
+        echo "<div align='right'><a href='editProduct' style='color:Red;'><b style='font-size: 18px;'>Go Back</b></a></div>";
+        echo '<br/>
+        <form name="productForm" method="post" enctype="multipart/form-data" onsubmit="validateUpdate(2);" autocomplete="off">
+        <input type="hidden" name="id" value="'.$id.'"/>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category Id</th>
+                    <td> 
+                        <select name="category" required>
+                            <option value=""></option>';
+                        for($i=0; $i<count($catDetails['id']); $i++){
+                            if($catDetails['id'][$i]==$prodDetails['category_id']){
+                                echo '<option value="'.$catDetails['id'][$i].'" selected>'.$catDetails['catName'][$i].'</option>';
+                            }
+                            else{
+                                echo '<option value="'.$catDetails['id'][$i].'">'.$catDetails['catName'][$i].'</option>';
+                            }
+                        }
+                 echo  '</select>
+                    </td>
+                </tr>
 
+                <tr>
+                    <th>Product Name</th>
+                    <td><input type="text" name="prodName" value="'.trim($prodDetails['prodName']).'" size="50" maxlength="250" required></td>
+                </tr>
 
+                <tr>
+                    <th>Each Price</th>
+                    <td><input type="number" min="0" step="0.01" max="999999999" name="price" value="'.trim($prodDetails['price']).'" required></td>
+                </tr>
+
+                <tr>
+                    <th>Quantity</th>
+                    <td><input type="number" min="0" name="quantity" value="'.trim($prodDetails['quantity']).'" required></td>
+                </tr>
+      
+                <tr>
+                    <th>Description</th>
+                    <td id="fileDescr">
+                        <a href="preview?id='.$id.'" target="_blank">Preview</a>&nbsp; &nbsp;
+                        <a href="javascript: changeDescr(\'fileDescr\'); top.iframeLoaded(\'editIframe\');">Change</a>
+                    </td>
+                </tr>
+                
+                <tr id="preview">
+                </tr>
+                
+                <tr>
+                    <th>Location</th>
+                    <td> 
+                        <select name="location" required>
+                            <option value=""></option>';
+                        for($i=0; $i<count($locDetails['id']); $i++){
+                            if($locDetails['id'][$i]==$prodDetails['location_id']){
+                                echo '<option value="'.$locDetails['id'][$i].'" selected>'.$locDetails['locName'][$i].'</option>';
+                            }
+                            else{
+                                echo '<option value="'.$locDetails['id'][$i].'">'.$locDetails['locName'][$i].'</option>';
+                            }
+                        }
+                 echo  '</select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>Manufacturer</th>
+                    <td><input type="text" name="manufacturer" size="50" maxlength="250" value="'.trim($prodDetails['manufacturer']).'" required></td>
+                </tr>
+                
+                <tr>
+                <td></td>
+                <td></td>
+                </tr>
+                
+                <tr>
+                <td></td>
+                <td></td>
+                </tr>
+                
+                <tr>
+                <td></td>
+                <td><input type="submit" name="Submit" value="Update"></td>
+                </tr>
+            </thead>
+        </table>
+      </form>';
     }
     elseif($for == "3"){
         $old = getLocation($id)['locName'];
@@ -54,7 +143,7 @@ elseif(isset($_POST) && !Empty($_POST) &&($_POST['Submit'] == "Update")){
         switch($tab){
             case 1: echo updateCategory($_POST['id'], $_POST['oldcatName'],$_POST['newcatName']);
                     break;
-            case 2: echo "2";
+            case 2: print_r(updateProduct($_POST));
                     break;
             case 3: echo updateLocation($_POST['id'], $_POST['oldlocName'],$_POST['newlocName']);
                     break;

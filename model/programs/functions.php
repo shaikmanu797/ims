@@ -257,6 +257,10 @@ function updateLocation($id, $old, $new){
     return $msg;
 }
 
+function updateProduct($postedContent){
+    return $postedContent;
+}
+
 /**
  * Updating  functions -- end here
  */

@@ -14,7 +14,14 @@ function validateUpdate(id) {
         }
     }
     else if(id == 2){
-
+        var dec = confirm("Do you really want to update this product?");
+        if (dec) {
+            document.productForm.action = "update?tab=2";
+            document.productForm.submit();
+        }
+        else {
+            return false;
+        }
     }
     else{
         var dec = confirm("Do you really want to update this location?");
@@ -58,5 +65,18 @@ function validateDelete(id){
         else {
             return false;
         }
+    }
+}
+
+function changeDescr(id) {
+    var id = document.getElementById(id);
+    var conf = confirm('Are you sure about changing the description?');
+    if(conf){
+        id.innerHTML = '<iframe src="upload.php" height="70px" width="383px" scrolling="auto" frameborder="0"></iframe>';
+        var preview = document.getElementById('preview');
+        preview.innerHTML = '<th style="color: red;">Message</th><td style="color: red;">If you do not want to change the description click on Go Back link above!!</td>';
+    }
+    else{
+        return false;
     }
 }
